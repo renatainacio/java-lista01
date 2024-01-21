@@ -21,13 +21,21 @@ public class App {
         holidayList.add(new Holiday("20-11-2024", "Dia Nacional de Zumbi e da Consciência Negra"));
         holidayList.add(new Holiday("25-12-2024", "Natal"));
 
-        System.out.println("Informe uma data no formato 'DD-MM-YYYY'");
-        String date = scanner.nextLine();
-        String holiday = isThisDateAHoliday(date, holidayList);
-        if (holiday.length() > 0)
-            System.out.println("Dia " + date + " é " + holiday +"! 🎉");
-        else
-            System.out.println("Dia " + date + " não é feriado 🥲");
+        System.out.println("Digite 1 para ver todos os feriados ou 2 para conferir se uma determinada data é feriado");
+        int option = scanner.nextInt();
+        if (option == 1) {
+            getAllHolidays(holidayList);
+        }
+        if (option == 2) {
+            System.out.println("Informe uma data no formato 'DD-MM-YYYY'");
+            scanner.nextLine();
+            String date = scanner.nextLine();
+            String holiday = isThisDateAHoliday(date, holidayList);
+            if (holiday.length() > 0)
+                System.out.println("Dia " + date + " é " + holiday +"! 🎉");
+            else
+                System.out.println("Dia " + date + " não é feriado 🥲");
+        }
     }
 
     public static String isThisDateAHoliday(String date, List<Holiday> holidayList){
@@ -37,5 +45,11 @@ public class App {
                 holidayName = holiday.getDescription();
         }
         return holidayName;
+    }
+
+    public static void getAllHolidays(List<Holiday> holidayList){
+        for (Holiday holiday : holidayList) {
+            System.out.println(holiday.getDate() + " - " + holiday.getDescription());
+        }
     }
 }
